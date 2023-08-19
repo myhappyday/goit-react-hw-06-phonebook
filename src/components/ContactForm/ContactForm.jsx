@@ -1,30 +1,17 @@
-// import React, { Component } from 'react';
-// import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/phonebookReducer';
-// import initialContacts from '../data/initialContacts.json';
 import { nanoid } from 'nanoid';
-// import PropTypes from 'prop-types';
+import Notiflix from 'notiflix';
+
+import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/phonebookSlice';
 import { Form, Label, Input, Button } from './ContactForm.styled';
 
-// Refactoring code using React-Hooks
 const ContactForm = () => {
   const nameInputId = nanoid(5);
   const numberInputId = nanoid(5);
 
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
-
-  // const [contacts, setContacts] = useState(() => {
-  //   return JSON.parse(localStorage.getItem('contacts')) ?? initialContacts;
-  // });
-
-  // const [filter, setFilter] = useState('');
-
-  // useEffect(() => {
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
 
   const onFormSubmit = event => {
     event.preventDefault();
@@ -37,13 +24,12 @@ const ContactForm = () => {
     };
 
     if (onDuplicateContact(name.value)) {
-      alert(`${name.value} is already in contacts`);
+      Notiflix.Notify.info(`${name.value} is already in contacts`);
       event.currentTarget.reset();
       name.focus();
       return;
     }
 
-    // setContacts([contact, ...contacts]);
     dispatch(addContact(contact));
     event.currentTarget.reset();
   };
@@ -53,24 +39,6 @@ const ContactForm = () => {
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
   };
-
-  // const deleteContact = contactId => {
-  //   setContactList(prevState =>
-  //     prevState.filter(contact => contact.id !== contactId)
-  //   );
-  // };
-
-  // const changeFilter = event => {
-  //   setFilter(event.currentTarget.value);
-  // };
-
-  // const getVisibleContacts = () => {
-  //   return contactList
-  //     .filter(contact =>
-  //       contact.name.toLowerCase().includes(filter.toLowerCase())
-  //     )
-  //     .sort((a, b) => a.name.localeCompare(b.name));
-  // };
 
   return (
     <Form onSubmit={onFormSubmit} autoComplete="off">
@@ -103,9 +71,5 @@ const ContactForm = () => {
   );
   // }
 };
-
-// ContactForm.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
 
 export default ContactForm;

@@ -1,8 +1,6 @@
-// import { useState } from 'react';
-// import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilter } from 'redux/selectors';
-import { setFilter } from 'redux/phonebookReducer';
+import { setFilter } from 'redux/phonebookSlice';
 import { Label, Input } from './Filter.styled';
 
 const Filter = () => {
@@ -26,10 +24,5 @@ const Filter = () => {
     </Label>
   );
 };
-
-// Filter.propTypes = {
-//   value: PropTypes.string,
-//   onChange: PropTypes.func.isRequired,
-// };
 
 export default Filter;

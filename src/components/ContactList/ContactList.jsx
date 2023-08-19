@@ -1,10 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getContacts, getFilter } from 'redux/selectors';
-// import { nanoid } from 'nanoid';
-// import PropTypes from 'prop-types';
-// import initialContacts from '../data/initialContacts.json';
 
+import { getContacts, getFilter } from 'redux/selectors';
 import ContactListItem from '../ContactListItem';
 import { List } from './ContactList.styled';
 
@@ -29,22 +26,10 @@ const ContactList = () => {
             id={id}
             name={name}
             number={number}
-            // onDelete={onDeleteContact}
           ></ContactListItem>
         ))}
     </List>
   );
 };
-
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ),
-//   onDeleteContact: PropTypes.func.isRequired,
-// };
 
 export default ContactList;
